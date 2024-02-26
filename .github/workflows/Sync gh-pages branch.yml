@@ -39,5 +39,4 @@ jobs:
           git config user.email "Tirrammissu@outlook.com"
           git checkout gh-pages
           git reset --hard zero
-          git pull origin gh-pages
-          git push origin gh-pages
+          git push --force origin zero:gh-pages
