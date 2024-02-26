@@ -13,8 +13,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup GPG key
+      - name: Setup GPG
         run: |
           echo "${{ secrets.PGP_PRIVATE_KEY }}" > private.key
           chmod 600 private.key
           gpg --import private.key
+          git config --global commit.gpgsign true
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
