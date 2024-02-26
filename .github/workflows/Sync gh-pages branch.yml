@@ -26,3 +26,11 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - name: Sync to gh-pages
+        run: |
+          git config user.name "EternalTimes"
+          git config user.email "Tirrammissu@outlook.com"
+          git checkout gh-pages
+          git reset --hard zero
+          git push origin gh-pages
